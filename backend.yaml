@@ -31,12 +31,12 @@
       path: /app
       state: directory
 
-      - name: install boto3 and botocore for aws_s3 module
-      ansible.builtin.pip:
-        name:
-          - boto3
-          - botocore
-        executable: pip3
+  - name: install boto3 and botocore for aws_s3 module
+    ansible.builtin.pip:
+      name:
+      - boto3
+      - botocore
+      executable: pip3
 
 
   - name: download the backend code
