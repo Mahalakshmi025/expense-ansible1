@@ -2,6 +2,9 @@
   hosts: backend
   become: yes
   vars:
+    s3_bucket: expense-builds
+    s3_object: expense-backend-v2.zip
+    s3_region: us-east-1
     mysql_root_password: ExpenseApp@1
     login_host: mysql.awspractice.shop
   tasks:
@@ -29,9 +32,15 @@
       state: directory
 
   - name: download the backend code
-    ansible.builtin.get_url:
-      url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-      dest: /tmp/backend.zip
+    amazon.aws.aws_s3:
+        bucket: "{{ s3_bucket }}"
+        object: "{{ s3_object }}"
+        dest: /tmp/backend.zip
+        mode: get
+        region: "{{ s3_region }}"
+    # ansible.builtin.get_url:
+    #   url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+    #   dest: /tmp/backend.zip
 
   - name: extract the code
     ansible.builtin.unarchive:
