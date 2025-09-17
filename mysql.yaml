@@ -5,7 +5,7 @@
     mysql_root_password: ExpenseApp@1
     login_host: mysql.awspractice.shop
   tasks:
-  - name: ansible to install boto3 & botocore
+  - name: ansible to install PyMySQL
     ansible.builtin.pip:
       name: 
       - PyMySQL
