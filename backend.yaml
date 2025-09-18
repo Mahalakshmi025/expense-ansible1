@@ -3,7 +3,7 @@
   become: yes
   vars:
     mysql_root_password: ExpenseApp@1
-    login_host: mysql.awspractice.shop
+    login_host: mysql.daws81s.online
   tasks:
   - name: disable default nodejs
     ansible.builtin.command: dnf module disable nodejs -y
@@ -28,22 +28,7 @@
       path: /app
       state: directory
 
-  - name: install boto3 and botocore for aws_s3 module
-    ansible.builtin.pip:
-      name:
-      - boto3
-      
-      - botocore
-      executable: pip3
-
-
   - name: download the backend code
-    # amazon.aws.aws_s3:
-    #     bucket: "{{ s3_bucket }}"
-    #     object: "{{ s3_object }}"
-    #     dest: /tmp/backend.zip
-    #     mode: get
-    #     region: "{{ s3_region }}"
     ansible.builtin.get_url:
       url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
       dest: /tmp/backend.zip
